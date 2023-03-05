@@ -14,20 +14,20 @@ const UserProfile = () => {
                             <h4 className="text-right">Your Profile</h4>
                         </div>
                         <div className="row mt-2">
-                            <div className="col-md-6"><label className="labels">First Name</label><input type className="form-control " defaultValue /></div>
-                            <div className="col-md-6"><label className="labels">Last Name</label><input type="text" className="form-control" defaultValue /></div>
+                            <div className="col-md-6"><label className="labels">First Name</label><input type="text"  className="form-control "  /></div>
+                            <div className="col-md-6"><label className="labels">Last Name</label><input type="text" className="form-control"  /></div>
                         </div>
                         <div className="row mt-3">
-                            <div className="col-md-12"><label className="labels">Mobile Number</label><input type="text" className="form-control" placeholder="enter phone number" defaultValue /></div>
-                            <div className="col-md-12"><label className="labels">Address Line 1</label><input type="text" className="form-control" placeholder="enter address line 1" defaultValue /></div>
-                            <div className="col-md-12"><label className="labels">Postcode</label><input type="text" className="form-control" placeholder="enter address line 2" defaultValue /></div>
-                            <div className="col-md-12"><label className="labels">State</label><input type="text" className="form-control" placeholder="enter address line 2" defaultValue /></div>
-                            <div className="col-md-12"><label className="labels">Area</label><input type="text" className="form-control" placeholder="enter address line 2" defaultValue /></div>
-                            <div className="col-md-12"><label className="labels">Email ID</label><input type="text" className="form-control" placeholder="enter email id" defaultValue /></div>
+                            <div className="col-md-12"><label className="labels">Mobile Number</label><input type="text" className="form-control" placeholder="enter phone number"  /></div>
+                            <div className="col-md-12"><label className="labels">Address Line 1</label><input type="text" className="form-control" placeholder="enter address line 1"  /></div>
+                            <div className="col-md-12"><label className="labels">Postcode</label><input type="text" className="form-control" placeholder="enter address line 2"  /></div>
+                            <div className="col-md-12"><label className="labels">State</label><input type="text" className="form-control" placeholder="enter address line 2"  /></div>
+                            <div className="col-md-12"><label className="labels">Area</label><input type="text" className="form-control" placeholder="enter address line 2"  /></div>
+                            <div className="col-md-12"><label className="labels">Email ID</label><input type="text" className="form-control" placeholder="enter email id"  /></div>
                         </div>
                         <div className="row mt-3">
-                            <div className="col-md-6"><label className="labels">Country</label><input type="text" className="form-control" placeholder="country" defaultValue /></div>
-                            <div className="col-md-6"><label className="labels">State/Region</label><input type="text" className="form-control" defaultValue placeholder="state" /></div>
+                            <div className="col-md-6"><label className="labels">Country</label><input type="text" className="form-control" placeholder="country"  /></div>
+                            <div className="col-md-6"><label className="labels">State/Region</label><input type="text" className="form-control" placeholder="state" /></div>
                         </div>
                         <div className="mt-5 text-center"><button className="btn btn-primary profile-button" type="button">Save
                             Profile</button></div>
@@ -35,6 +35,7 @@ const UserProfile = () => {
                 </div>
             </div>
         </div>
+
     )
 
 }

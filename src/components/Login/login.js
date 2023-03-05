@@ -88,7 +88,7 @@ const Login = () => {
                           </div>
                         </div>
                       </div>
-                      <p className="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="Home#portfolio" className="link-danger">Register</a></p>
+                      <p className="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="/home#portfolio" className="link-danger">Register</a></p>
                     </div>
                   </div>
                 </div></form>

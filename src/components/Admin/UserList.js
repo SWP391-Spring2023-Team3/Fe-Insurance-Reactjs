@@ -6,7 +6,7 @@ const UserList = () => {
         
         <div>
             <div style={{ top: 0, width: '100%', backgroundColor: '#222222', display: 'flex', justifyContent: 'space-between' }}>
-                <a href="Adminsite.html" className="btn btn-light">Back admin site</a>
+                <a href="/adminsite" className="btn btn-light">Back admin site</a>
                 <h2 style={{ color: 'aqua' }}>User List</h2>
             </div>
             <div style={{ width: '100%' }}>

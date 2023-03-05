@@ -10,6 +10,7 @@ import Home from '../Home/Home'
 import Login from '../Login/login.js';
 import UserProfile from '../User/UserProfile.js';
 import UserList from '../Admin/UserList.js';
+import Adminsite from '../Admin/Adminsite.js';
 
 
 
@@ -24,6 +25,7 @@ function App() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/profile" element={<UserProfile />} />
                     <Route path="/list-user" element={<UserList />} />
+                    <Route path="/adminsite" element={<Adminsite />}/>
                 </Routes>
             </BrowserRouter>
         </div>
