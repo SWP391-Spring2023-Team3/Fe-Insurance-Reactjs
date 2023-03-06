@@ -1,12 +1,18 @@
 import React, { useState } from "react";
-const Adminsite = () => {
+
+
+const UserSite = () => {
+    
+
+
+
     return (
         <div>
             <div style={{ top: 0, width: '100%', backgroundColor: '#222222', display: 'flex', justifyContent: 'space-between' }}>
-                <h2 style={{ color: 'white' }}>Welcome admin</h2>
+                <h2 style={{ color: 'white' }}>Welcome User</h2>
                 <div>
                     {/* button modale */}
-                    <button type="button" className="btn btn-outline-info"  style={{ margin: '3px' }} data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <button type="button" className="btn btn-outline-info" style={{ margin: '3px' }} data-bs-toggle="modal" data-bs-target="#exampleModal">
                         Change password
                     </button>
                     {/* Modal */}
@@ -21,15 +27,15 @@ const Adminsite = () => {
                                     <div className="modal-body">
                                         <label>Email</label>
                                         <div className="form-group pass_show">
-                                            <input type="text"  className="form-control" placeholder="Enter Email" name="email" />
+                                            <input type="text" className="form-control" placeholder="Enter Email" name="email" />
                                         </div>
                                         <label>New Password</label>
                                         <div className="form-group pass_show">
-                                            <input type="password"  className="form-control" placeholder="New Password" name="newpassword" />
+                                            <input type="password" className="form-control" placeholder="New Password" name="newpassword" />
                                         </div>
                                         <label>Confirm Password</label>
                                         <div className="form-group pass_show">
-                                            <input type="password"  className="form-control" placeholder="Confirm Password" name="confirmpassword" />
+                                            <input type="password" className="form-control" placeholder="Confirm Password" name="confirmpassword" />
                                         </div>
                                     </div>
                                     <div className="modal-footer">
@@ -47,30 +53,33 @@ const Adminsite = () => {
             </div>
             <div style={{ width: '100%' }}>
                 <div className="row">
-                    <div className="col-md-2" style={{ height: '90vh', backgroundColor: '#d8fbfd9d' }}>
+                    <div className="col-md-3" style={{ height: '90vh', backgroundColor: '#d8fbfd9d' }}>
                         <div style={{ borderBottom: '1px lightgray solid', width: '100%', textAlign: 'center', padding: '5px' }}>
-                            <a href="/list-user" style={{ textDecoration: 'none', color: 'rgb(0, 0, 0)' }}>User List</a>
+                            <a href="/profile" style={{ textDecoration: 'none', color: 'rgb(0, 0, 0)' }}>Profile</a>
+                        </div>
+                        <div style={{ borderBottom: '1px lightgray solid', width: '100%', textAlign: 'center', padding: '5px' }}>
+                            <a href="/contract" style={{ textDecoration: 'none', color: 'rgb(0, 0, 0)' }}>Contract</a>
+                        </div>
+                        <div style={{ borderBottom: '1px lightgray solid', width: '100%', textAlign: 'center', padding: '5px' }}>
+                            <a href="/punishment" style={{ textDecoration: 'none', color: 'rgb(0, 0, 0)' }}>Punishment</a>
+                        </div>
+                        <div style={{ borderBottom: '1px lightgray solid', width: '100%', textAlign: 'center', padding: '5px' }}>
+                            <a href="/compensation" style={{ textDecoration: 'none', color: 'rgb(0, 0, 0)' }}>Compensation</a>
+                        </div>
+                        <div style={{ borderBottom: '1px lightgray solid', width: '100%', textAlign: 'center', padding: '5px' }}>
+                            <a href="/request-compensation" style={{ textDecoration: 'none', color: 'rgb(0, 0, 0)' }}>Request Compensation</a>
+                        </div>
+                        <div style={{ borderBottom: '1px lightgray solid', width: '100%', textAlign: 'center', padding: '5px' }}>
+                            <a href="/accident" style={{ textDecoration: 'none', color: 'rgb(0, 0, 0)' }}>Accident</a>
                         </div>
                     </div>
-                </div>
-                <div className="row">
-                    <div className="col-md-2" style={{ height: '90vh', backgroundColor: '#d8fbfd9d' }}>
-                        <div style={{ borderBottom: '1px lightgray solid', width: '100%', textAlign: 'center', padding: '5px' }}>
-                            <a href="/list-user" style={{ textDecoration: 'none', color: 'rgb(0, 0, 0)' }}>User List</a>
-                        </div>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-md-2" style={{ height: '90vh', backgroundColor: '#d8fbfd9d' }}>
-                        <div style={{ borderBottom: '1px lightgray solid', width: '100%', textAlign: 'center', padding: '5px' }}>
-                            <a href="/list-user" style={{ textDecoration: 'none', color: 'rgb(0, 0, 0)' }}>User List</a>
-                        </div>
+                    {/* Page content*/}
+                    <div className="col-md-10">
                     </div>
                 </div>
             </div>
-            
         </div>
 
     )
 }
-export default Adminsite
+export default UserSite

@@ -1,24 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from 'axios'
 
 
 
 const Login = () => {
+
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
   const [account, setAccount] = useState(null)
 
-  axios.post(`https://insurance-card.herokuapp.com/api/users`,
-    {
+  const handleLogin = () => {
+      axios.get('https://jsonplaceholder.typicode.com/todos/1',
+        {
+          "client_id": "ewwIprREAb2Me95vtV79VtG40Za4JKx8RikhFLeqVtg",
+          "client_secret": "hv5W_7uacE0qCoHPqhr9aJFaorho2wwNalmBqJTda_E",
+          "grant_type": "password",
+          "email": "devicecarlonesss@gmail.com",
+          "password": "hihihi"
 
-      "client_id": "ewwIprREAb2Me95vtV79VtG40Za4JKx8RikhFLeqVtg",
-      "client_secret": "hv5W_7uacE0qCoHPqhr9aJFaorho2wwNalmBqJTda_E",
-      "grant_type": "password",
-      "email": "devicecarlonesss@gmail.com",
-      "password": "hihihi"
+        }).then(res => {
+          setAccount(res.data)
+        }).catch(error => console.log(error));
+    }
+    if(account != null){
+      
+    }
 
-    }).then(res => {
-      setAccount(res.data)
-    })
-    .catch(error => console.log(error));
+
   console.log(account)
   return (
     <div>
@@ -37,12 +45,12 @@ const Login = () => {
                 </div>
                 {/* Email input */}
                 <div className="form-outline mb-4">
-                  <input type="text" id="form3Example3" name="email" className="form-control form-control-lg" placeholder="Enter a valid email address" />
+                  <input value={email} type="text" id="form3Example3" name="email" className="form-control form-control-lg" placeholder="Enter a valid email address" />
                   <label className="form-label" htmlFor="form3Example3">Email address</label>
                 </div>
                 {/* Password input */}
                 <div className="form-outline mb-3">
-                  <input type="text" name="password" id="form3Example4" className="form-control form-control-lg" placeholder="Enter password" />
+                  <input value={password} type="text" name="password" id="form3Example4" className="form-control form-control-lg" placeholder="Enter password" />
                   <label className="form-label" htmlFor="form3Example4">Password</label>
                 </div>
                 <div className="d-flex justify-content-between align-items-center">
@@ -53,7 +61,8 @@ const Login = () => {
                       Remember me
                     </label>
                     <div className="text-center text-lg-start mt-4 pt-2">
-                      <button type="submit" className="btn btn-primary btn-lg" style={{ paddingLeft: '2.5rem', paddingRight: '2.5rem' }}>Login</button>
+                      <button type="submit" className="btn btn-primary btn-lg" style={{ paddingLeft: '2.5rem', paddingRight: '2.5rem' 
+                      }}>Login</button>
                       {/* Button trigger modal */}
                       <button type="button" style={{ paddingLeft: '2.5rem', paddingRight: '2.5rem' }} className="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         Forgot password

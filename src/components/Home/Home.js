@@ -68,7 +68,7 @@ const Home = () => {
             <div className="row">
                 <div className="columns download">
                     <p>
-                        <a href="Login" className="button">Login </a>
+                        <a href="login" className="button">Login </a>
                     </p>
                 </div>
             </div> {/* end row */}
