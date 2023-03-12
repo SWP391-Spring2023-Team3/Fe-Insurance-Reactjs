@@ -17,15 +17,17 @@ const Contract = () => {
                             <thead>
                                 <tr>
                                     <th scope="col">ID</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Control</th>
+                                    <th scope="col">name</th>
+                                    <th scope="col">date start</th>
+                                    <th scope="col">date end</th>
+                                    <th scope="col">action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Mark</td>
-                                    <td>Mark</td>
+                                    <td>1</td>
+                                    <td></td>
+                                    <td>Otto</td>
                                     <td>Otto</td>
                                     <td>
                                         <button type="button" className="btn btn-primary">Edit</button>

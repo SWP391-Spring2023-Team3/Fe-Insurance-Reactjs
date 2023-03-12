@@ -1,5 +1,16 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector} from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { Logout } from "../../store/actions/userActions";
 const Adminsite = () => {
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    const handleLogout = () =>{
+        navigate("/login")
+        dispatch(Logout)           
+    }
+
     return (
         <div>
             <div style={{ top: 0, width: '100%', backgroundColor: '#222222', display: 'flex', justifyContent: 'space-between' }}>
@@ -17,7 +28,7 @@ const Adminsite = () => {
                                     <h5 className="modal-title" id="exampleModalLabel">Reset password</h5>
                                     <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
                                 </div>
-                                <form action method="post">
+                                <form >
                                     <div className="modal-body">
                                         <label>Email</label>
                                         <div className="form-group pass_show">
@@ -42,7 +53,9 @@ const Adminsite = () => {
                         </div>
                     </div>
                     {/* End modal */}
-                    <a href="/home" className="btn btn-outline-info" style={{ margin: '3px' }}>Logout</a>
+                    <div className="btn btn-outline-info" style={{ margin: '3px' }}
+                        onClick={handleLogout}
+                    >Logout</div>
                 </div>
             </div>
             <div style={{ width: '100%' }}>

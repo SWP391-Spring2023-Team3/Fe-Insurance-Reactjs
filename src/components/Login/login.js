@@ -1,33 +1,43 @@
 import React, { useEffect, useState } from "react";
-import axios from 'axios'
+import { useNavigate } from "react-router-dom";
+import { useDispatch,useSelector} from "react-redux";
+import { fetchAuthUser } from "../../store/reducers/userReducer";
 
+  
 
 
 const Login = () => {
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const [account, setAccount] = useState(null)
-
-  const handleLogin = () => {
-      axios.get('https://jsonplaceholder.typicode.com/todos/1',
-        {
-          "client_id": "ewwIprREAb2Me95vtV79VtG40Za4JKx8RikhFLeqVtg",
-          "client_secret": "hv5W_7uacE0qCoHPqhr9aJFaorho2wwNalmBqJTda_E",
-          "grant_type": "password",
-          "email": "devicecarlonesss@gmail.com",
-          "password": "hihihi"
-
-        }).then(res => {
-          setAccount(res.data)
-        }).catch(error => console.log(error));
+  const [error, setError] = useState("")
+  const navigate = useNavigate();
+  const dispath = useDispatch()
+  const userData = useSelector(state => state.userData)
+  const handleLogin = async () => {
+      dispath(fetchAuthUser({
+        email:email,
+        password:password
+      }))
+      if(userData.data){
+        navigate("/adminsite")
+      }
+  }
+  useEffect(() => {
+    if(userData.error){
+      setError(<p>password or username wrong</p>)
+    }else{
+      setError("");
     }
-    if(account != null){
-      
-    }
+  },[userData.error])
 
+  const handleEmail = (e) => {
+    setEmail(e.target.value)
+  }
+  const handlePassword = (e) => {
+    setPassword(e.target.value)
+  }
 
-  console.log(account)
   return (
     <div>
       <section className="vh-100">
@@ -37,7 +47,7 @@ const Login = () => {
               <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" className="img-fluid" alt="Sample image" />
             </div>
             <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-              <form action method="post">
+              <div >
                 <div className="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
                 </div>
                 <div className="divider d-flex align-items-center my-4">
@@ -45,12 +55,13 @@ const Login = () => {
                 </div>
                 {/* Email input */}
                 <div className="form-outline mb-4">
-                  <input value={email} type="text" id="form3Example3" name="email" className="form-control form-control-lg" placeholder="Enter a valid email address" />
+                  <input value={email} onChange={handleEmail} type="text" id="form3Example3" name="email" className="form-control form-control-lg" placeholder="Enter a valid email address" />
                   <label className="form-label" htmlFor="form3Example3">Email address</label>
                 </div>
+
                 {/* Password input */}
                 <div className="form-outline mb-3">
-                  <input value={password} type="text" name="password" id="form3Example4" className="form-control form-control-lg" placeholder="Enter password" />
+                  <input value={password} onChange={handlePassword} type="text" name="password" id="form3Example4" className="form-control form-control-lg" placeholder="Enter password" />
                   <label className="form-label" htmlFor="form3Example4">Password</label>
                 </div>
                 <div className="d-flex justify-content-between align-items-center">
@@ -60,9 +71,11 @@ const Login = () => {
                     <label className="form-check-label" htmlFor="form2Example3">
                       Remember me
                     </label>
+                    {error}
                     <div className="text-center text-lg-start mt-4 pt-2">
-                      <button type="submit" className="btn btn-primary btn-lg" style={{ paddingLeft: '2.5rem', paddingRight: '2.5rem' 
-                      }}>Login</button>
+                      <button type="submit" className="btn btn-primary btn-lg" style={{
+                        paddingLeft: '2.5rem', paddingRight: '2.5rem'
+                      }} onClick={handleLogin}>Login</button>
                       {/* Button trigger modal */}
                       <button type="button" style={{ paddingLeft: '2.5rem', paddingRight: '2.5rem' }} className="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         Forgot password
@@ -100,7 +113,7 @@ const Login = () => {
                       <p className="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="/home#portfolio" className="link-danger">Register</a></p>
                     </div>
                   </div>
-                </div></form>
+                </div></div>
             </div>
           </div>
         </div>

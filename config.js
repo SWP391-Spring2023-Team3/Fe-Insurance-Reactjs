@@ -3,6 +3,12 @@ export default config = {
     clientID: 'a87f2a65-db1c-48b8-b9d2-65e7e5bc209e',
     clientSecret: 'Q4yAnMrqowHcYUPGF0-fF-JcEoq7-mGKl8FxBym6i9o',
     redirectURI: 'http://localhost:3001/oauth-callback',
+
+
+
+
+
+    
     applicationID: 'a87f2a65-db1c-48b8-b9d2-65e7e5bc209e',
   
     // our FusionAuth api key

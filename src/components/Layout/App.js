@@ -19,32 +19,31 @@ import CompensationHistory from '../User/CompensationHistory';
 import Contract from '../User/Contract';
 import PunishmentHistory from '../User/PunishmentHistory';
 import RequestCompensation from '../User/RequestCompensation';
+import { Provider } from 'react-redux';
+import Store  from '../../store/reducers/reducer';
 
 
 function App() {
     return (
-        <div>
+        <Provider store={Store}>
             <BrowserRouter>
-                <Routes>
-                    <Route exact path="/" element={<Home />} />
-                    <Route exact path="/home" element={<Home />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/profile" element={<UserProfile />} />
-                    <Route path="/list-user" element={<UserList />} />
-                    <Route path="/adminsite" element={<Adminsite />}/>
-<<<<<<< Updated upstream
-                    <Route path="/payment"  element={<Payment/>}/>
-=======
-                    <Route path="/usersite" element={<Usersite />}/>
-                    <Route path="/accident" element={<AccidentHistory />}/>
-                    <Route path="/compensation" element={<CompensationHistory />}/>
-                    <Route path="/contract" element={<Contract />}/>
-                    <Route path="/punishment" element={<PunishmentHistory />}/>
-                    <Route path="/request-compensation" element={<RequestCompensation />}/>
->>>>>>> Stashed changes
-                </Routes>
+                    <Routes>
+                        <Route exact path="/" element={<Home />} />
+                        <Route exact path="/home" element={<Home />} />
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/profile" element={<UserProfile />} />
+                        <Route path="/list-user" element={<UserList />} />
+                        <Route path="/adminsite" element={<Adminsite />} />
+                        <Route path="/payment" element={<Payment />} />
+                        <Route path="/usersite" element={<Usersite />} />
+                        <Route path="/accident" element={<AccidentHistory />} />
+                        <Route path="/compensation" element={<CompensationHistory />} />
+                        <Route path="/contract" element={<Contract />} />
+                        <Route path="/punishment" element={<PunishmentHistory />} />
+                        <Route path="/request-compensation" element={<RequestCompensation />} />
+                    </Routes>
             </BrowserRouter>
-        </div>
+        </Provider>
     )
 }
 

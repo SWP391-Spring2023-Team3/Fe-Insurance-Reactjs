@@ -10,10 +10,6 @@ import '../Style/magnific-popup.css'
 
 
 const Home = () => {
-    
-    
-
-
     return (
         <div >
         {/* Header
