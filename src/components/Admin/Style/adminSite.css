@@ -1,0 +1,11 @@
+
+.content{
+    display: flex;
+    justify-content: space-between;
+}
+.content-sidebar{
+    width: 18%;
+}
+.content-data{
+    width: 80%;
+}

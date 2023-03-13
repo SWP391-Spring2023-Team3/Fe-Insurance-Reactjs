@@ -7,12 +7,11 @@ import {
 } from "react-router-dom";
 
 import Home from '../Home/Home'
-import Login from '../Login/login.js';
+import Login from '../Login/Login.js';
 import UserProfile from '../User/UserProfile.js';
 import UserList from '../Admin/UserList.js';
 import Adminsite from '../Admin/Adminsite.js';
 import Payment from '../User/Payment.js';
-
 import Usersite from '../User/Usersite.js';
 import AccidentHistory from '../User/AccidentHistory';
 import CompensationHistory from '../User/CompensationHistory';

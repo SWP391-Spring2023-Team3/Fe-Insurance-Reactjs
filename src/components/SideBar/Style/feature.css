@@ -1,0 +1,29 @@
+.feature{
+    background-color: #8bb6e59e;
+    color: black;
+    font-weight: 600;
+    font-size: 17px;
+    height: 48px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.feature:not(:first-child){
+    margin-top: 5px;
+}
+.feature:hover{
+    animation: hoverFeature .35s forwards;
+}
+.active{
+    background-color: #89b6ef;
+}
+
+@keyframes hoverFeature {
+    from{
+        background-color: #8bb6e59e;
+    }to{
+        background-color: #d8e5f39e;
+    }
+}
