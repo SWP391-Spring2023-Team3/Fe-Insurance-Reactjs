@@ -19,13 +19,15 @@ import Contract from '../User/Contract';
 import PunishmentHistory from '../User/PunishmentHistory';
 import RequestCompensation from '../User/RequestCompensation';
 import { Provider } from 'react-redux';
-import Store  from '../../store/reducers/reducer';
+import {store,persistor} from '../../store/store';
+import { PersistGate } from 'redux-persist/integration/react';
 
 
 function App() {
     return (
-        <Provider store={Store}>
-            <BrowserRouter>
+        <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}>
+                <BrowserRouter>
                     <Routes>
                         <Route exact path="/" element={<Home />} />
                         <Route exact path="/home" element={<Home />} />
@@ -41,7 +43,8 @@ function App() {
                         <Route path="/punishment" element={<PunishmentHistory />} />
                         <Route path="/request-compensation" element={<RequestCompensation />} />
                     </Routes>
-            </BrowserRouter>
+                </BrowserRouter>
+            </PersistGate>
         </Provider>
     )
 }

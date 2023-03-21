@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch,useSelector} from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 import { fetchAuthUser } from "../../store/reducers/userReducer";
-
   
 
 
@@ -14,7 +13,7 @@ const Login = () => {
   const navigate = useNavigate();
   const dispath = useDispatch()
   const userData = useSelector(state => state.userData)
-  const handleLogin = async () => {
+  const handleLogin =  async() => {
       dispath(fetchAuthUser({
         email:email,
         password:password
@@ -22,14 +21,12 @@ const Login = () => {
       if(userData.data){
         navigate("/adminsite")
       }
+      if(userData.error){
+        setError(<p>password or username wrong</p>)
+      }else{
+        setError("");
+      }
   }
-  useEffect(() => {
-    if(userData.error){
-      setError(<p>password or username wrong</p>)
-    }else{
-      setError("");
-    }
-  },[userData.error])
 
   const handleEmail = (e) => {
     setEmail(e.target.value)

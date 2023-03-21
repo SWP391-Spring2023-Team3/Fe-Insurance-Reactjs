@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { fetchListPunishment, fetchCreatePunishment, fetchDeletePunishment, fetchUpdatePunishment } from '../../store/reducers/punishmentReducer'
-import FormPunishment from './FormPunishment'
+import { fetchListAccident, fetchCreateAccident, fetchDeleteAccident ,fetchUpdateAccident} from '../../store/reducers/accidentReducer'
+import FormAccident from './FormAccident'
 import { store } from '../../store/store'
 import { useSelector } from 'react-redux'
 
 const Style = {
-    addPunishment: {
+    addAccident: {
         height: "50px",
         backgroundColor: "green",
         border: "none",
@@ -15,60 +15,60 @@ const Style = {
 }
 
 
-const ListPunishment = (props) => {
+const ListAccident = (props) => {
     const dispatch = useDispatch()
 
-    const [PopupPunishment, setPopupPunishment] = useState(false)
-    const [punishments, setPunishments] = useState([])
+    const [PopupAccident, setPopupAccident] = useState(false)
+    const [Accidents, setAccidents] = useState([])
     const [dataUppdate, setDataUpdate] = useState(null)
     const [isFetch, setIsFetch] = useState(false)
 
-    const statePunishments = useSelector((state) => state.listPunishmentData);
+    const stateAccidents = useSelector((state) => state.listAccidentData);
     useEffect(() => {
+        console.log("get list")
         const accessToken = store.getState().userData.data.access_token
-        dispatch(fetchListPunishment({ access_token: accessToken }))
+        dispatch(fetchListAccident({ access_token: accessToken }))
         setIsFetch(false);
     }, [isFetch])
 
     useEffect(() => {
-        if(statePunishments.data){
-        setPunishments(statePunishments.data)
+        if(stateAccidents.data != null){
+            setAccidents(stateAccidents.data)
         }
-    }, [statePunishments])
+    }, [stateAccidents])
 
-    const addPunishment = (item) => {
+    const addAccident = (item) => {
         console.log("item",item)
         const accessToken = store.getState().userData.data.access_token
-        dispatch(fetchCreatePunishment({
+        dispatch(fetchCreateAccident({
              access_token: accessToken,
              data :{
                 title: item.title,
                 reason: item.reason,
                 issuedDate: item.issuedDate,
                 resolvedDate: item.resolvedDate,
-                status: item.status,
              }
             }))
-        handlePopupPunishment()
+        handlePopupAccident()
         setIsFetch(true)
     }
 
-    const handlePopupPunishment = (item) => {
+    const handlePopupAccident = (item) => {
         setDataUpdate(item)
-        setPopupPunishment(!PopupPunishment)
+        setPopupAccident(!PopupAccident)
     }
 
-    const deletePunishment = (id) => {
+    const deleteAccident = (id) => {
         const accessToken = store.getState().userData.data.access_token
-        dispatch(fetchDeletePunishment({
+        dispatch(fetchDeleteAccident({
             access_token: accessToken,
             id: id,
         }))
         setIsFetch(true)
     }
-    const updatePunishment = (item) => {
+    const updateAccident = (item) => {
         const accessToken = store.getState().userData.data.access_token
-        dispatch(fetchUpdatePunishment({
+        dispatch(fetchUpdateAccident({
             access_token: accessToken,
             id: item.id,
             data :{
@@ -76,20 +76,18 @@ const ListPunishment = (props) => {
                 reason: item.reason,
                 issuedDate: item.issuedDate,
                 resolvedDate: item.resolvedDate,
-                status: item.status,
              }
         }))
-        handlePopupPunishment()
         setIsFetch(true)
     }
     return (
         <div className="col-md-10">
-            <button type="button" style={Style.addPunishment} className="btn btn-primary"
-                onClick={handlePopupPunishment}
-            >Add new punishment</button>
-            {PopupPunishment ? <FormPunishment title={"Add New Punishment"}
-                handlePopup={handlePopupPunishment} addPunishment={addPunishment} data={dataUppdate}
-                updatePunishment={updatePunishment}/> : ""}
+            <button type="button" style={Style.addAccident} className="btn btn-primary"
+                onClick={handlePopupAccident}
+            >Add new Accident</button>
+            {PopupAccident ? <FormAccident title={"Add New Accident"}
+                handlePopup={handlePopupAccident} addAccident={addAccident} data={dataUppdate}
+                updateAccident={updateAccident}/> : ""}
             <table className="table table-bordered">
                 <thead>
                     <tr>
@@ -103,7 +101,7 @@ const ListPunishment = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {punishments.map(item =>(
+                    {Accidents.map(item =>(
                         <tr key={item.id}>
                             <td>{item.id}</td>
                             <td>in</td>
@@ -112,8 +110,8 @@ const ListPunishment = (props) => {
                             <td>{item.resolved_date}</td>
                             <td>{item.status}</td>
                             <td>
-                                <button onClick={() => handlePopupPunishment(item)} type="button" className="btn btn-primary">Edit</button>
-                                <button onClick={() => deletePunishment(item.id)} type="button" className="btn btn-danger">Delete</button>
+                                <button onClick={() => handlePopupAccident(item)} type="button" className="btn btn-primary">Edit</button>
+                                <button onClick={() => deleteAccident(item.id)} type="button" className="btn btn-danger">Delete</button>
                             </td>
                         </tr>
                     ))}
@@ -123,4 +121,4 @@ const ListPunishment = (props) => {
     )
 }
 
-export default ListPunishment
+export default ListAccident

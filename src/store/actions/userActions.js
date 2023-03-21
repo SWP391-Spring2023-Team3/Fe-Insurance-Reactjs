@@ -1,10 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import Store,{rootReducer} from '../reducers/reducer'
+import rootReducer from "../reducers/reducer";
+import Store from '../store'
 
 
 export const Logout = () => {
-    Store = configureStore({
-        reducer : rootReducer
-    })
+    // Store = configureStore({
+    //     reducer : rootReducer
+    // })
 };
 
