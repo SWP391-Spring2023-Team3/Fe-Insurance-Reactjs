@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { fetchListAccident, fetchCreateAccident, fetchDeleteAccident ,fetchUpdateAccident} from '../../store/reducers/accidentReducer'
+import { fetchListAccident, fetchCreateAccident, fetchDeleteAccident, fetchUpdateAccident } from '../../store/reducers/accidentReducer'
 import FormAccident from './FormAccident'
 import { store } from '../../store/store'
 import { useSelector } from 'react-redux'
@@ -22,33 +22,32 @@ const ListAccident = (props) => {
     const [Accidents, setAccidents] = useState([])
     const [dataUppdate, setDataUpdate] = useState(null)
     const [isFetch, setIsFetch] = useState(false)
-
-    const stateAccidents = useSelector((state) => state.listAccidentData);
+    const stateAccidents = useSelector((state) => state.listAccidentData)
     useEffect(() => {
-        console.log("get list")
-        const accessToken = store.getState().userData.data.access_token
-        dispatch(fetchListAccident({ access_token: accessToken }))
+        const user = store.getState().userData.data
+        console.log(user.access_token)
+        dispatch(fetchListAccident({ access_token: user.access_token }))
         setIsFetch(false);
     }, [isFetch])
 
     useEffect(() => {
-        if(stateAccidents.data != null){
+        if (stateAccidents.data != null) {
             setAccidents(stateAccidents.data)
         }
     }, [stateAccidents])
 
     const addAccident = (item) => {
-        console.log("item",item)
         const accessToken = store.getState().userData.data.access_token
         dispatch(fetchCreateAccident({
-             access_token: accessToken,
-             data :{
+            access_token: accessToken,
+            data: {
                 title: item.title,
                 reason: item.reason,
                 issuedDate: item.issuedDate,
                 resolvedDate: item.resolvedDate,
-             }
-            }))
+                status: item.status
+            }
+        }))
         handlePopupAccident()
         setIsFetch(true)
     }
@@ -71,48 +70,61 @@ const ListAccident = (props) => {
         dispatch(fetchUpdateAccident({
             access_token: accessToken,
             id: item.id,
-            data :{
+            data: {
                 title: item.title,
                 reason: item.reason,
                 issuedDate: item.issuedDate,
                 resolvedDate: item.resolvedDate,
-             }
+                status: item.status,
+            }
         }))
+        handlePopupAccident()
         setIsFetch(true)
     }
     return (
         <div className="col-md-10">
-            <button type="button" style={Style.addAccident} className="btn btn-primary"
+            {props.isAdmin ? <button type="button" style={Style.addAccident} className="btn btn-primary"
                 onClick={handlePopupAccident}
-            >Add new Accident</button>
-            {PopupAccident ? <FormAccident title={"Add New Accident"}
+            >Add new Accident</button>:<button type="button" style={Style.addAccident} className="btn btn-primary"
+                onClick={handlePopupAccident}
+            >Request new Accident</button>}
+            {PopupAccident ? <FormAccident title={"Accident"}
                 handlePopup={handlePopupAccident} addAccident={addAccident} data={dataUppdate}
-                updateAccident={updateAccident}/> : ""}
+                updateAccident={updateAccident} /> : ""}
             <table className="table table-bordered">
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">Tile</th>
+                        <th scope="col">Title</th>
                         <th scope="col">Reason</th>
                         <th scope="col">Issued Date</th>
                         <th scope="col">Resolved Date</th>
                         <th scope="col">Status</th>
-                        <th scope="col">Action</th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    {Accidents.map(item =>(
+                    {Accidents.map(item => (
                         <tr key={item.id}>
                             <td>{item.id}</td>
-                            <td>in</td>
-                            <td>Otto</td>
+                            <td>{item.title}</td>
+                            <td>{item.reason}</td>
                             <td>{item.issued_date}</td>
                             <td>{item.resolved_date}</td>
                             <td>{item.status}</td>
-                            <td>
+                            {props.isAdmin ? <td style={{display:"flex",justifyContent:"space-around"}}>
                                 <button onClick={() => handlePopupAccident(item)} type="button" className="btn btn-primary">Edit</button>
                                 <button onClick={() => deleteAccident(item.id)} type="button" className="btn btn-danger">Delete</button>
+                                <button type="button" className="btn btn-danger" style={{ backgroundColor: "#43e2ae", borderColor: "#43e2ae" }}>
+                                <a  href={require('../File/contract-1.pdf')}  style={{color:"white"}}>View</a>
+                                </button>
+                            </td> : <td  style={{display:"flex",justifyContent:"space-around"}}>
+                                <button type="button" className="btn btn-danger" style={{ backgroundColor: "#43e2ae", borderColor: "#43e2ae" }}>
+                                    <a  href={require('../File/contract-1.pdf')}  style={{color:"white"}}>View</a>
+                                </button>
+                                <button type="button" className="btn btn-danger" style={{ backgroundColor: "#ad43e2", borderColor: "#ad43e2" }}>Renew </button>
                             </td>
+                            }
                         </tr>
                     ))}
                 </tbody>

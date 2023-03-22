@@ -4,49 +4,75 @@ import ListContract from "../Contract/ListContract"
 import ListAccident from "../Accident/ListAccident"
 import ListPayment from "../Payment/ListPayment"
 import ListCompensation from "../Compensation/ListCompensation"
+import UserProfile from "../Profile/UserProfile"
 
 export const featuresUser = 
 [
     {
-        name:"contracts",
+        id:1,
+        name:"contracts history",
         icon : null,
         description : "",
         color: "null",
-        data : <ListPunishment/>
+        active:true,
+        data : <ListContract isAdmin={false}/>
     },    
     {
+        id:2,
         name:"payment history",
         icon : null,
         description : "",
         color: "null",
-        data : <ListPunishment/>
+        active:false,
+        data : <ListPayment isAdmin={false}/>
     },
     {
-        name:"punishment",
+        id:3,
+        name:"punishment history",
         icon : null,
         description : "",
         color: "null",
-        data : <ListPunishment/>
+        active:false,
+        data : <ListPunishment isAdmin={false}/>
+    },
+    {
+        id:4,
+        name:"compensation history",
+        icon : null,
+        description : "",
+        color: "null",
+        active:false,
+        data : <ListCompensation isAdmin={false}/>
+    },
+    {
+        id:5,
+        name:"accident history",
+        icon : null,
+        description : "",
+        color: "null",
+        active:false,
+        data : <ListAccident isAdmin={false}/>
+    },
+    {
+        id:6,
+        name:"profile",
+        icon : null,
+        description : "",
+        color: "null",
+        active:false,
+        data : <UserProfile/>
     },
 ]
 
 export const featuresAdmin = 
 [
     {
-        id:1,
-        name:"list user",
-        icon : null,
-        description : "",
-        active:true,
-        data : <ListPunishment/>
-    },
-    {
         id:2,
         name:"list contract",
         icon : null,
         description : "",
         active: false,
-        data : <ListContract/>
+        data : <ListContract  isAdmin={true}/>
     },
     {
         id:3,
@@ -54,7 +80,7 @@ export const featuresAdmin =
         icon : null,
         description : "",
         active: false,
-        data : <ListPayment/>
+        data : <ListPayment isAdmin={true}/>
     },
     {
         id:4,
@@ -62,7 +88,7 @@ export const featuresAdmin =
         icon : null,
         description : "",
         active: false,
-        data : <ListPunishment/>
+        data : <ListPunishment isAdmin={true}/>
     },
     {
         id:5,
@@ -70,7 +96,7 @@ export const featuresAdmin =
         icon : null,
         description : "",
         active: false,
-        data : <ListCompensation/>
+        data : <ListCompensation isAdmin={true}/>
     },
     {
         id:6,
@@ -78,6 +104,6 @@ export const featuresAdmin =
         icon : null,
         description : "",
         active: false,
-        data : <ListAccident/>
+        data : <ListAccident isAdmin={true}/>
     },
 ]

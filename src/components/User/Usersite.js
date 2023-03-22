@@ -1,19 +1,32 @@
 import React, { useState } from "react";
-import Header from "../Header/Header";
+import { HeaderUser } from "../Header/Header";
 import SideBar from "../SideBar/SideBar"
-
+import './Style/user.css'
 
 const UserSite = () => {
+    const [menu, setMenu] = useState("")
+    const handleMenu = () => {
+        setMenu(menu===""?"open" : "")
+    }
+
+    const [data , setData] = useState("")
 
     return (
         <div>
-            <Header/>
+            <HeaderUser />
             <div className="content">
-                <div className="content-sidebar">
-                    <SideBar isAdmin={false}/>
+                <nav className={menu} style={{zIndex:"99"}}> 
+                    <section class="overlay"></section>
+                    <div class="logo">
+                        <i class="fa-solid fa-bars" onClick={handleMenu} style={{ marginRight: "8px", cursor: "pointer" }}></i>
+                        <span class="logo-name">User</span>
+                    </div>
+                    <div className="content-sidebar">
+                    <SideBar isAdmin={false} setData={setData}/>
                 </div>
-                <div className="content-data">
-                    
+                </nav>
+                <div className="content-data" style={{marginLeft:"343px"}}>
+                    {data}
                 </div>
             </div>
         </div>

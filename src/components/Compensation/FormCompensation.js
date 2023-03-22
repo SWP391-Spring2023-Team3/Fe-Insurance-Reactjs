@@ -16,7 +16,7 @@ const FormCompensation = (props) => {
     const [reason, setReason] = useState("")
     const [issuedDate, setIssuedDate] = useState("")
     const [resovelDate, setResovelDate] = useState("")
-    const [status, setStatus] = useState("Active")
+    const [status, setStatus] = useState("Processing")
 
     const handleTitle = (e) => {
         setTitle(e.target.value)
@@ -59,8 +59,8 @@ const FormCompensation = (props) => {
 
     useEffect(() => {
         if (checkUpdate) {
-            setTitle(props.data.id)
-            setReason(props.data.issued_date)
+            setTitle(props.data.title)
+            setReason(props.data.reason)
             setIssuedDate(props.data.issued_date)
             setResovelDate(props.data.resolved_date)
         }
@@ -96,9 +96,9 @@ const FormCompensation = (props) => {
                         </div>
                         <label>Status</label>
                         <select onChange={handleStatus}>
-                            <option value="Active">Active</option>
-                            <option value="Not Active">Not Active</option>
-                            <option value="doing">doing</option>
+                            <option value="Processing">Processing</option>
+                            <option value="Done">Done</option>
+                            <option value="Failed">Failed</option>
                         </select>
                     </div>
                     <div className="modal-footer">

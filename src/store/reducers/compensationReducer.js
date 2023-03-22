@@ -42,10 +42,10 @@ export const fetchCreateCompensation = createAsyncThunk("createCompensation/fetc
     const body = {
         "title" : props.data.title,
         "reason" :  props.data.reason,
-        "user_id":1,
+        "user_id":46,
         "issued_date":  props.data.issuedDate,
         "resolved_date":  props.data.resolvedDate,
-        "status": "Accepted"
+        "status": props.data.status,
     }
     const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/compensations`,body,header)
     return res.data;
@@ -75,10 +75,10 @@ export const fetchUpdateCompensation = createAsyncThunk("updateCompensation/fetc
     const body = {
         "title" : props.data.title,
         "reason" :  props.data.reason,
-        "user_id":1,
+        "user_id":46,
         "issued_date":  props.data.issuedDate,
         "resolved_date":  props.data.resolvedDate,
-        "status": "Accepted"
+        "status": props.data.status,
     }
     const res = await axios.put(`${process.env.REACT_APP_API_URL}/api/compensations/${props.id}`,body,header)
     return res.data;
@@ -120,3 +120,5 @@ export const DeleteCompensation = createReducer(initialState, (builder) => {
         state.error = action.error.message
     })
 })
+
+

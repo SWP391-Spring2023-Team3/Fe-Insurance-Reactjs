@@ -13,16 +13,16 @@ const styles = {
 }
 const FormPayment = (props) => {
     const [title, setTitle] = useState("")
-    const [reason, setReason] = useState("")
+    const [Amount, setAmount] = useState("")
     const [issuedDate, setIssuedDate] = useState("")
     const [resovelDate, setResovelDate] = useState("")
-    const [status, setStatus] = useState("Active")
+    const [Description, setDescription] = useState("")
 
     const handleTitle = (e) => {
         setTitle(e.target.value)
     }
-    const handleReason = (e) => {
-        setReason(e.target.value)
+    const handleAmount = (e) => {
+        setAmount(e.target.value)
     }
     const handleIssuedDate = (e) => {
         setIssuedDate(e.target.value)
@@ -30,39 +30,38 @@ const FormPayment = (props) => {
     const handleResovelDate = (e) => {
         setResovelDate(e.target.value)
     }
-    console.log(status)
+    console.log(Description)
     const handleAddPayment = () => {
         
         props.addPayment({
             title: title,
-            reason: reason,
+            amount: Amount,
             issuedDate: issuedDate,
             resolvedDate: resovelDate,
-            status:status
+            description:Description
         })
     }
     const handleUpdatePayment = () => {
         props.updatePayment({
             id: props.data.id,
             title: title,
-            reason: reason,
+            amount: Amount,
             issuedDate: issuedDate,
-            resolvedDate: resovelDate,
-            status: status
+            description: Description
         })
     }
-    const handleStatus = (e) => {
-        setStatus(e.target.value );
+    const handleDescription = (e) => {
+        setDescription(e.target.value );
     }
 
     let checkUpdate = props.data.id != null
 
     useEffect(() => {
         if (checkUpdate) {
-            setTitle(props.data.id)
-            setReason(props.data.issued_date)
-            setIssuedDate(props.data.issued_date)
-            setResovelDate(props.data.resolved_date)
+            setTitle(props.data.title)
+            setAmount(props.data.amount)
+            setIssuedDate(props.data.date_issued)
+            setDescription(props.data.description)
         }
     }, [])
 
@@ -82,24 +81,18 @@ const FormPayment = (props) => {
                         <div className="form-group pass_show">
                             <input value={title} onChange={handleTitle} type="text" className="form-control" placeholder="Enter Title" name="email" />
                         </div>
-                        <label>Reason</label>
+                        <label>Amount</label>
                         <div className="form-group pass_show">
-                            <input value={reason} onChange={handleReason} type="text" className="form-control" placeholder="Enter Reason" name="email" />
+                            <input value={Amount} onChange={handleAmount} type="text" className="form-control" placeholder="Enter Amount" name="email" />
                         </div>
-                        <label>Date Issued</label>
+                        <label>Issued Date</label>
                         <div className="form-group pass_show">
                             <input value={issuedDate} onChange={handleIssuedDate} type="date" className="form-control" name="email" />
                         </div>
-                        <label>Date Resovel</label>
+                        <label>Description</label>
                         <div className="form-group pass_show">
-                            <input value={resovelDate} onChange={handleResovelDate} type="date" className="form-control" name="email" />
+                            <input value={Description} onChange={handleDescription} type="text" className="form-control" placeholder="Enter description" name="email" />
                         </div>
-                        <label>Status</label>
-                        <select onChange={handleStatus}>
-                            <option value="Active">Active</option>
-                            <option value="Not Active">Not Active</option>
-                            <option value="doing">doing</option>
-                        </select>
                     </div>
                     <div className="modal-footer">
                         <button onClick={props.handlePopup} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>

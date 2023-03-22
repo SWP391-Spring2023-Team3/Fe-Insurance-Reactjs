@@ -33,7 +33,6 @@ export const ListContractData = createReducer(initialState, (builder) => {
 
 
 export const fetchCreateContract = createAsyncThunk("createContract/fetch", async(props) => {
-    console.log(props.access_token)
     const header = {
         headers: {
             "Authorization" : `Bearer ${props.access_token}`
@@ -41,12 +40,13 @@ export const fetchCreateContract = createAsyncThunk("createContract/fetch", asyn
     }
     const body = {
         "title" : props.data.title,
-        "reason" :  props.data.reason,
-        "user_id":1,
-        "issued_date":  props.data.issuedDate,
-        "resolved_date":  props.data.resolvedDate,
-        "status": props.data.stautus,
+        "description" :  props.data.description,
+        "user_id":46,
+        "start_date":  props.data.startDate,
+        "end_date":  props.data.endDate,
+        "status": props.data.status,
     }
+    console.log("add")
     const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/contracts`,body,header)
     return res.data;
 });
@@ -74,10 +74,10 @@ export const fetchUpdateContract = createAsyncThunk("updateContract/fetch", asyn
     }
     const body = {
         "title" : props.data.title,
-        "reason" :  props.data.reason,
-        "user_id":1,
-        "issued_date":  props.data.issuedDate,
-        "resolved_date":  props.data.resolvedDate,
+        "description" :  props.data.description,
+        "user_id":46,
+        "start_date":  props.data.startDate,
+        "end_date":  props.data.endDate,
         "status": props.data.status,
     }
     const res = await axios.put(`${process.env.REACT_APP_API_URL}/api/contracts/${props.id}`,body,header)
@@ -120,3 +120,4 @@ export const DeleteContract = createReducer(initialState, (builder) => {
         state.error = action.error.message
     })
 })
+

@@ -42,10 +42,10 @@ export const fetchCreateAccident = createAsyncThunk("createAccident/fetch", asyn
     const body = {
         "title" : props.data.title,
         "reason" :  props.data.reason,
-        "user_id":1,
+        "user_id":46,
         "issued_date":  props.data.issuedDate,
         "resolved_date":  props.data.resolvedDate,
-        "status": "Accepted"
+        "status": props.data.status,
     }
     const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/accidents`,body,header)
     return res.data;
@@ -75,10 +75,10 @@ export const fetchUpdateAccident = createAsyncThunk("updateAccident/fetch", asyn
     const body = {
         "title" : props.data.title,
         "reason" :  props.data.reason,
-        "user_id":1,
+        "user_id":46,
         "issued_date":  props.data.issuedDate,
         "resolved_date":  props.data.resolvedDate,
-        "status": "Accepted"
+        "status": props.data.status,
     }
     const res = await axios.put(`${process.env.REACT_APP_API_URL}/api/accidents/${props.id}`,body,header)
     return res.data;

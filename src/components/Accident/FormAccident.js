@@ -17,6 +17,7 @@ const FormAccident = (props) => {
     const [issuedDate, setIssuedDate] = useState("")
     const [resovelDate, setResovelDate] = useState("")
     const [status, setStatus] = useState("Active")
+    const [link, setLink] = useState("")
 
     const handleTitle = (e) => {
         setTitle(e.target.value)
@@ -29,6 +30,9 @@ const FormAccident = (props) => {
     }
     const handleResovelDate = (e) => {
         setResovelDate(e.target.value)
+    }    
+    const handleLink = (e) => {
+        setLink(e.target.value)
     }
     console.log(status)
     const handleAddAccident = () => {
@@ -59,8 +63,8 @@ const FormAccident = (props) => {
 
     useEffect(() => {
         if (checkUpdate) {
-            setTitle(props.data.id)
-            setReason(props.data.issued_date)
+            setTitle(props.data.title)
+            setReason(props.data.reason)
             setIssuedDate(props.data.issued_date)
             setResovelDate(props.data.resolved_date)
         }
@@ -93,6 +97,10 @@ const FormAccident = (props) => {
                         <label>Date Resovel</label>
                         <div className="form-group pass_show">
                             <input value={resovelDate} onChange={handleResovelDate} type="date" className="form-control" name="email" />
+                        </div>
+                        <label>Link</label>
+                        <div className="form-group pass_show">
+                            <input value={link} onChange={handleLink} type="file" className="form-control" placeholder="Enter Title" name="email" />
                         </div>
                         <label>Status</label>
                         <select onChange={handleStatus}>

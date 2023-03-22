@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import Header from "../Header/Header"; 
+import {HeaderAdmin} from "../Header/Header"; 
 import ListPunishment from "../Punishment/ListPunishment";
 import SideBar from "../SideBar/SideBar";
 import './Style/adminSite.css'
@@ -11,7 +11,7 @@ const Adminsite = () => {
     const [data , setData] = useState("")
     return (
         <div>
-            <Header/>
+            <HeaderAdmin/>
             <div className="content">
                 <div className="content-sidebar">
                     <SideBar isAdmin={true} setData={setData}/>

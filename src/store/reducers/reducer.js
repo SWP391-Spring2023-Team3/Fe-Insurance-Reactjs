@@ -12,6 +12,7 @@ const rootReducer = combineReducers({
     listPunishmentData: ListPunishmentData,
     createPunishment: CreatePunishment,
     deletePunishment: DeletePunishment,
+
     //contract
     listContractData: ListContractData,
     createContract: CreateContract,

@@ -4,22 +4,57 @@ import '../Style/default.css'
 import '../Style/layout.css'
 import '../Style/media-queries.css'
 import '../Style/magnific-popup.css'
+import { useDispatch } from "react-redux";
+import { fetchCreateUser } from "../../store/reducers/userReducer";
+import { useNavigate } from "react-router-dom";
 
 
 
 
 
 const Home = () => {
+    const [emailRegis, setEmailRegis] = useState("")
+    const [nameRegis, setNameRegis] = useState("")
+    const [passwordRegis, setPasswordRegis] = useState("")
+    const [rePasswordRegis, setRePasswordRegis] = useState("")
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const handleEmailRegis = (e) => {
+        setEmailRegis(e.target.value)
+    }
+    const handlePassRegis = (e) => {
+        setPasswordRegis(e.target.value)
+    }
+    const handleRePassRegis = (e) => {
+        setRePasswordRegis(e.target.value)
+    }
+    const handleNameRegis = (e) => {
+        setNameRegis(e.target.value)
+    }
+
+    const handleRegister =() => {
+        try{
+            dispatch(fetchCreateUser({
+                email:emailRegis,
+                password:passwordRegis
+            }))
+            navigate("/login")
+        }catch{
+            
+        }
+    }
+
     return (
         <div >
         {/* Header
    ================================================== */}
         < header id = "home" >
-            <nav id="nav-wrap">
+            <nav id="nav-wrap" style={{backgroundColor:"#161415"}}>
                 
                 <ul id="nav" className="nav"  >
                     <li className="current"><a className="smoothscroll" href="#home">Home</a></li>
-                    <li><a className="smoothscroll" href="#about">About Insurance</a></li>
+                    <li><a className="smoothscroll" href="#about">About/Login</a></li>
                     <li><a className="smoothscroll" href="#resume">Resume</a></li>
                     <li><a className="smoothscroll" href="#portfolio">register</a></li>
                     <li><a className="smoothscroll" href="#register">Contact</a></li>
@@ -155,18 +190,18 @@ const Home = () => {
                     <form >
                         <div>
                             <label>Enter Name <span className="required">*</span></label>
-                            <input type="text" defaultValue size={35} name="name" />
+                            <input value={nameRegis} onChange={handleNameRegis} type="text" defaultValue size={35} name="name" />
                         </div><div>
                             <label>Enter Email <span className="required">*</span></label>
-                            <input type="text" defaultValue size={35} name="email" />
+                            <input value={emailRegis} onChange={handleEmailRegis} type="text" defaultValue size={35} name="email" />
                         </div><div>
                             <label>Enter Password</label>
-                            <input type="text" defaultValue size={35} name="password" />
+                            <input value={passwordRegis} onChange={handlePassRegis} type="password" defaultValue size={35} name="password" />
                         </div><div>
                             <label>Re-Password</label>
-                            <input type="text" defaultValue size={35} name="repassword" />
+                            <input value={rePasswordRegis} onChange={handleRePassRegis} type="password" defaultValue size={35} name="repassword" />
                         </div><div>
-                            <button type="submit">Register</button>
+                            <button type="submit" onClick={handleRegister}>Register</button>
                             <span id="image-loader">
                                 <img alt="" src="images/loader.gif" />
                             </span>

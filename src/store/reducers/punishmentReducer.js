@@ -41,7 +41,7 @@ export const fetchCreatePunishment = createAsyncThunk("createPunishment/fetch", 
     const body = {
         "title" : props.data.title,
         "reason" :  props.data.reason,
-        "user_id":1,
+        "user_id":46,
         "issued_date":  props.data.issuedDate,
         "resolved_date":  props.data.resolvedDate,
         "status": props.data.status,
@@ -74,11 +74,12 @@ export const fetchUpdatePunishment = createAsyncThunk("updatePunishment/fetch", 
     const body = {
         "title" : props.data.title,
         "reason" :  props.data.reason,
-        "user_id":1,
+        "user_id":46,
         "issued_date":  props.data.issuedDate,
         "resolved_date":  props.data.resolvedDate,
         "status": props.data.status
     }
+    console.log("abc")
     const res = await axios.put(`${process.env.REACT_APP_API_URL}/api/punishments/${props.id}`,body,header)
     return res.data;
 });

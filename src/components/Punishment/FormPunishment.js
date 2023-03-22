@@ -59,8 +59,8 @@ const FormPunishment = (props) => {
 
     useEffect(() => {
         if (checkUpdate) {
-            setTitle(props.data.id)
-            setReason(props.data.issued_date)
+            setTitle(props.data.title)
+            setReason(props.data.reason)
             setIssuedDate(props.data.issued_date)
             setResovelDate(props.data.resolved_date)
         }
@@ -96,9 +96,8 @@ const FormPunishment = (props) => {
                         </div>
                         <label>Status</label>
                         <select onChange={handleStatus}>
-                            <option value="Active">Active</option>
-                            <option value="Not Active">Not Active</option>
-                            <option value="doing">doing</option>
+                            <option value="Waiting">Waiting</option>
+                            <option value="Complete">Complete</option>
                         </select>
                     </div>
                     <div className="modal-footer">

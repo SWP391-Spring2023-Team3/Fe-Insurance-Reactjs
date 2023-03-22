@@ -19,36 +19,36 @@ const ListPunishment = (props) => {
     const dispatch = useDispatch()
 
     const [PopupPunishment, setPopupPunishment] = useState(false)
-    const [punishments, setPunishments] = useState([])
+    const [Punishments, setPunishments] = useState([])
     const [dataUppdate, setDataUpdate] = useState(null)
     const [isFetch, setIsFetch] = useState(false)
 
-    const statePunishments = useSelector((state) => state.listPunishmentData);
+    const statePunishments = useSelector((state) => state.listPunishmentData)
     useEffect(() => {
-        const accessToken = store.getState().userData.data.access_token
-        dispatch(fetchListPunishment({ access_token: accessToken }))
+        const user = store.getState().userData.data
+        dispatch(fetchListPunishment({ access_token: user.access_token }))
         setIsFetch(false);
     }, [isFetch])
 
     useEffect(() => {
-        if(statePunishments.data){
-        setPunishments(statePunishments.data)
+        if (statePunishments.data != null) {
+            setPunishments(statePunishments.data)
         }
     }, [statePunishments])
 
     const addPunishment = (item) => {
-        console.log("item",item)
+        console.log("item", item)
         const accessToken = store.getState().userData.data.access_token
         dispatch(fetchCreatePunishment({
-             access_token: accessToken,
-             data :{
+            access_token: accessToken,
+            data: {
                 title: item.title,
                 reason: item.reason,
                 issuedDate: item.issuedDate,
                 resolvedDate: item.resolvedDate,
-                status: item.status,
-             }
-            }))
+                status: item.status
+            }
+        }))
         handlePopupPunishment()
         setIsFetch(true)
     }
@@ -71,50 +71,57 @@ const ListPunishment = (props) => {
         dispatch(fetchUpdatePunishment({
             access_token: accessToken,
             id: item.id,
-            data :{
+            data: {
                 title: item.title,
                 reason: item.reason,
                 issuedDate: item.issuedDate,
                 resolvedDate: item.resolvedDate,
                 status: item.status,
-             }
+            }
         }))
         handlePopupPunishment()
         setIsFetch(true)
     }
     return (
         <div className="col-md-10">
-            <button type="button" style={Style.addPunishment} className="btn btn-primary"
+            {props.isAdmin ? <button type="button" style={Style.addPunishment} className="btn btn-primary"
                 onClick={handlePopupPunishment}
-            >Add new punishment</button>
-            {PopupPunishment ? <FormPunishment title={"Add New Punishment"}
+            >Add new Punishment</button>:<button type="button" style={Style.addPunishment} className="btn btn-primary"
+                onClick={handlePopupPunishment}
+            >Request new Punishment</button>}
+            {PopupPunishment ? <FormPunishment title={"Punishment"}
                 handlePopup={handlePopupPunishment} addPunishment={addPunishment} data={dataUppdate}
-                updatePunishment={updatePunishment}/> : ""}
+                updatePunishment={updatePunishment} /> : ""}
             <table className="table table-bordered">
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">Tile</th>
+                        <th scope="col">Title</th>
                         <th scope="col">Reason</th>
                         <th scope="col">Issued Date</th>
                         <th scope="col">Resolved Date</th>
                         <th scope="col">Status</th>
-                        <th scope="col">Action</th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    {punishments.map(item =>(
+                    {Punishments.map(item => (
                         <tr key={item.id}>
                             <td>{item.id}</td>
-                            <td>in</td>
-                            <td>Otto</td>
+                            <td>{item.title}</td>
+                            <td>{item.reason}</td>
                             <td>{item.issued_date}</td>
                             <td>{item.resolved_date}</td>
                             <td>{item.status}</td>
-                            <td>
+                            {props.isAdmin ? <td style={{display:"flex",justifyContent:"space-around"}}>
                                 <button onClick={() => handlePopupPunishment(item)} type="button" className="btn btn-primary">Edit</button>
                                 <button onClick={() => deletePunishment(item.id)} type="button" className="btn btn-danger">Delete</button>
+                                <button type="button" className="btn btn-danger" style={{ backgroundColor: "#43e2ae", borderColor: "#43e2ae" }}><a  href={require('../File/contract-1.pdf')}  style={{color:"white"}}>View</a></button>
+                            </td> : <td  style={{display:"flex",justifyContent:"space-around"}}>
+                                <button type="button" className="btn btn-danger" style={{ backgroundColor: "#43e2ae", borderColor: "#43e2ae" }}><a  href={require('../File/contract-1.pdf')}  style={{color:"white"}}>View</a></button>
+                                <button type="button" className="btn btn-danger" style={{ backgroundColor: "#ad43e2", borderColor: "#ad43e2" }}>Renew </button>
                             </td>
+                            }
                         </tr>
                     ))}
                 </tbody>

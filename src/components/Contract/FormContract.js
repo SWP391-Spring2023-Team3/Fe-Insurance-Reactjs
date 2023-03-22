@@ -13,16 +13,16 @@ const styles = {
 }
 const FormContract = (props) => {
     const [title, setTitle] = useState("")
-    const [reason, setReason] = useState("")
+    const [Description, setDescription] = useState("")
     const [issuedDate, setIssuedDate] = useState("")
     const [resovelDate, setResovelDate] = useState("")
-    const [status, setStatus] = useState("Active")
+    const [status, setStatus] = useState("Processing")
 
     const handleTitle = (e) => {
         setTitle(e.target.value)
     }
-    const handleReason = (e) => {
-        setReason(e.target.value)
+    const handleDescription = (e) => {
+        setDescription(e.target.value)
     }
     const handleIssuedDate = (e) => {
         setIssuedDate(e.target.value)
@@ -31,10 +31,9 @@ const FormContract = (props) => {
         setResovelDate(e.target.value)
     }
     const handleAddContract = () => {
-        
         props.addContract({
             title: title,
-            reason: reason,
+            description: Description,
             issuedDate: issuedDate,
             resolvedDate: resovelDate,
             status:status
@@ -44,7 +43,7 @@ const FormContract = (props) => {
         props.updateContract({
             id: props.data.id,
             title: title,
-            reason: reason,
+            description: Description,
             issuedDate: issuedDate,
             resolvedDate: resovelDate,
             status: status
@@ -58,13 +57,17 @@ const FormContract = (props) => {
 
     useEffect(() => {
         if (checkUpdate) {
-            setTitle(props.data.id)
-            setReason(props.data.issued_date)
-            setIssuedDate(props.data.issued_date)
-            setResovelDate(props.data.resolved_date)
+            setTitle(props.data.title)
+            setDescription(props.data.description)
+            setIssuedDate(props.data.start_date)
+            setResovelDate(props.data.end_date)
         }
     }, [])
+    const [link, setLink] = useState("")
 
+    const handleLink = (e) => {
+        setLink(e.target.value)
+    }
 
     return (
         <div className="modal-dialog" style={styles.modal}>
@@ -81,23 +84,27 @@ const FormContract = (props) => {
                         <div className="form-group pass_show">
                             <input value={title} onChange={handleTitle} type="text" className="form-control" placeholder="Enter Title" name="email" />
                         </div>
-                        <label>Reason</label>
+                        <label>Description</label>
                         <div className="form-group pass_show">
-                            <input value={reason} onChange={handleReason} type="text" className="form-control" placeholder="Enter Reason" name="email" />
+                            <input value={Description} onChange={handleDescription} type="text" className="form-control" placeholder="Enter Description" name="email" />
                         </div>
-                        <label>Date Issued</label>
+                        <label>Start Date</label>
                         <div className="form-group pass_show">
                             <input value={issuedDate} onChange={handleIssuedDate} type="date" className="form-control" name="email" />
                         </div>
-                        <label>Date Resovel</label>
+                        <label>End Date</label>
                         <div className="form-group pass_show">
                             <input value={resovelDate} onChange={handleResovelDate} type="date" className="form-control" name="email" />
                         </div>
+                        <label>Link</label>
+                        <div className="form-group pass_show">
+                            <input value={link} onChange={handleLink} type="file" className="form-control" placeholder="Enter Title" name="email" />
+                        </div>
                         <label>Status</label>
                         <select onChange={handleStatus}>
+                            <option value="Processing">Processing</option>
                             <option value="Active">Active</option>
                             <option value="Not Active">Not Active</option>
-                            <option value="doing">doing</option>
                         </select>
                     </div>
                     <div className="modal-footer">

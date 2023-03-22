@@ -40,12 +40,11 @@ export const fetchCreatePayment = createAsyncThunk("createPayment/fetch", async(
         }
     }
     const body = {
-        "title" : props.data.title,
-        "reason" :  props.data.reason,
-        "user_id":1,
-        "issued_date":  props.data.issuedDate,
-        "resolved_date":  props.data.resolvedDate,
-        "status": "Accepted"
+        "user_id":46,
+        "title":props.data.title,
+        "date_issued":  props.data.issuedDate,
+        "amount":  props.data.amount,
+        "description": props.data.description
     }
     const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/payments`,body,header)
     return res.data;
@@ -66,19 +65,17 @@ export const CreatePayment = createReducer(initialState, (builder) => {
 
 
 export const fetchUpdatePayment = createAsyncThunk("updatePayment/fetch", async(props) => {
-    console.log(props.access_token)
     const header = {
         headers: {
             "Authorization" : `Bearer ${props.access_token}`
         }
     }
     const body = {
-        "title" : props.data.title,
-        "reason" :  props.data.reason,
-        "user_id":1,
-        "issued_date":  props.data.issuedDate,
-        "resolved_date":  props.data.resolvedDate,
-        "status": "Accepted"
+        "user_id":46,
+        "title":props.data.title,
+        "date_issued":  props.data.issuedDate,
+        "amount":  props.data.amount,
+        "description": props.data.description
     }
     const res = await axios.put(`${process.env.REACT_APP_API_URL}/api/payments/${props.id}`,body,header)
     return res.data;
@@ -120,3 +117,4 @@ export const DeletePayment = createReducer(initialState, (builder) => {
         state.error = action.error.message
     })
 })
+
