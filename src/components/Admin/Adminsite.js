@@ -4,6 +4,7 @@ import Header from "../Header/Header";
 import ListPunishment from "../Punishment/ListPunishment";
 import SideBar from "../SideBar/SideBar";
 import './Style/adminSite.css'
+import { useSelector } from "react-redux";
 
 
 const Adminsite = () => {

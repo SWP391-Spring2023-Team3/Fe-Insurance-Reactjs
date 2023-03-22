@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { fetchListPunishment, fetchCreatePunishment, fetchDeletePunishment, fetchUpdatePunishment } from '../../store/reducers/punishmentReducer'
-import FormPunishment from './FormPunishment'
+import { fetchListCompensation, fetchCreateCompensation, fetchDeleteCompensation,fetchUpdateCompensation } from '../../store/reducers/compensationReducer'
+import FormCompensation from './FormCompensation'
 import { store } from '../../store/store'
 import { useSelector } from 'react-redux'
 
 const Style = {
-    addPunishment: {
+    addCompensation: {
         height: "50px",
         backgroundColor: "green",
         border: "none",
@@ -15,60 +15,60 @@ const Style = {
 }
 
 
-const ListPunishment = (props) => {
+const ListCompensation = (props) => {
     const dispatch = useDispatch()
 
-    const [PopupPunishment, setPopupPunishment] = useState(false)
-    const [punishments, setPunishments] = useState([])
+    const [PopupCompensation, setPopupCompensation] = useState(false)
+    const [Compensations, setCompensations] = useState([])
     const [dataUppdate, setDataUpdate] = useState(null)
     const [isFetch, setIsFetch] = useState(false)
 
-    const statePunishments = useSelector((state) => state.listPunishmentData);
+    const stateCompensations = useSelector((state) => state.listCompensationData);
     useEffect(() => {
+        console.log("get list")
         const accessToken = store.getState().userData.data.access_token
-        dispatch(fetchListPunishment({ access_token: accessToken }))
+        dispatch(fetchListCompensation({ access_token: accessToken }))
         setIsFetch(false);
     }, [isFetch])
 
     useEffect(() => {
-        if(statePunishments.data){
-        setPunishments(statePunishments.data)
+        if(stateCompensations.data != null){
+        setCompensations(stateCompensations.data)
         }
-    }, [statePunishments])
+    }, [stateCompensations])
 
-    const addPunishment = (item) => {
+    const addCompensation = (item) => {
         console.log("item",item)
         const accessToken = store.getState().userData.data.access_token
-        dispatch(fetchCreatePunishment({
+        dispatch(fetchCreateCompensation({
              access_token: accessToken,
              data :{
                 title: item.title,
                 reason: item.reason,
                 issuedDate: item.issuedDate,
                 resolvedDate: item.resolvedDate,
-                status: item.status,
              }
             }))
-        handlePopupPunishment()
+        handlePopupCompensation()
         setIsFetch(true)
     }
 
-    const handlePopupPunishment = (item) => {
+    const handlePopupCompensation = (item) => {
         setDataUpdate(item)
-        setPopupPunishment(!PopupPunishment)
+        setPopupCompensation(!PopupCompensation)
     }
 
-    const deletePunishment = (id) => {
+    const deleteCompensation = (id) => {
         const accessToken = store.getState().userData.data.access_token
-        dispatch(fetchDeletePunishment({
+        dispatch(fetchDeleteCompensation({
             access_token: accessToken,
             id: id,
         }))
         setIsFetch(true)
     }
-    const updatePunishment = (item) => {
+    const updateCompensation = (item) => {
         const accessToken = store.getState().userData.data.access_token
-        dispatch(fetchUpdatePunishment({
+        dispatch(fetchUpdateCompensation({
             access_token: accessToken,
             id: item.id,
             data :{
@@ -76,20 +76,18 @@ const ListPunishment = (props) => {
                 reason: item.reason,
                 issuedDate: item.issuedDate,
                 resolvedDate: item.resolvedDate,
-                status: item.status,
              }
         }))
-        handlePopupPunishment()
         setIsFetch(true)
     }
     return (
         <div className="col-md-10">
-            <button type="button" style={Style.addPunishment} className="btn btn-primary"
-                onClick={handlePopupPunishment}
-            >Add new punishment</button>
-            {PopupPunishment ? <FormPunishment title={"Add New Punishment"}
-                handlePopup={handlePopupPunishment} addPunishment={addPunishment} data={dataUppdate}
-                updatePunishment={updatePunishment}/> : ""}
+            <button type="button" style={Style.addCompensation} className="btn btn-primary"
+                onClick={handlePopupCompensation}
+            >Add new Compensation</button>
+            {PopupCompensation ? <FormCompensation title={"Add New Compensation"}
+                handlePopup={handlePopupCompensation} addCompensation={addCompensation} data={dataUppdate}
+                updateCompensation={updateCompensation}/> : ""}
             <table className="table table-bordered">
                 <thead>
                     <tr>
@@ -103,7 +101,7 @@ const ListPunishment = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {punishments.map(item =>(
+                    {Compensations.map(item =>(
                         <tr key={item.id}>
                             <td>{item.id}</td>
                             <td>in</td>
@@ -112,8 +110,8 @@ const ListPunishment = (props) => {
                             <td>{item.resolved_date}</td>
                             <td>{item.status}</td>
                             <td>
-                                <button onClick={() => handlePopupPunishment(item)} type="button" className="btn btn-primary">Edit</button>
-                                <button onClick={() => deletePunishment(item.id)} type="button" className="btn btn-danger">Delete</button>
+                                <button onClick={() => handlePopupCompensation(item)} type="button" className="btn btn-primary">Edit</button>
+                                <button onClick={() => deleteCompensation(item.id)} type="button" className="btn btn-danger">Delete</button>
                             </td>
                         </tr>
                     ))}
@@ -123,4 +121,4 @@ const ListPunishment = (props) => {
     )
 }
 
-export default ListPunishment
+export default ListCompensation

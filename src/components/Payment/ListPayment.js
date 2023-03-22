@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { fetchListPunishment, fetchCreatePunishment, fetchDeletePunishment, fetchUpdatePunishment } from '../../store/reducers/punishmentReducer'
-import FormPunishment from './FormPunishment'
+import { fetchListPayment, fetchCreatePayment, fetchDeletePayment ,fetchUpdatePayment} from '../../store/reducers/paymentReducer'
+import FormPayment from './FormPayment'
 import { store } from '../../store/store'
 import { useSelector } from 'react-redux'
 
 const Style = {
-    addPunishment: {
+    addPayment: {
         height: "50px",
         backgroundColor: "green",
         border: "none",
@@ -15,81 +15,79 @@ const Style = {
 }
 
 
-const ListPunishment = (props) => {
+const ListPayment = (props) => {
     const dispatch = useDispatch()
 
-    const [PopupPunishment, setPopupPunishment] = useState(false)
-    const [punishments, setPunishments] = useState([])
+    const [PopupPayment, setPopupPayment] = useState(false)
+    const [Payments, setPayments] = useState([])
     const [dataUppdate, setDataUpdate] = useState(null)
     const [isFetch, setIsFetch] = useState(false)
 
-    const statePunishments = useSelector((state) => state.listPunishmentData);
+    const statePayments = useSelector((state) => state.listPaymentData);
     useEffect(() => {
+        console.log("get list")
         const accessToken = store.getState().userData.data.access_token
-        dispatch(fetchListPunishment({ access_token: accessToken }))
+        dispatch(fetchListPayment({ access_token: accessToken }))
         setIsFetch(false);
     }, [isFetch])
 
     useEffect(() => {
-        if(statePunishments.data){
-        setPunishments(statePunishments.data)
+        if (statePayments.data != null) {
+            setPayments(statePayments.data)
         }
-    }, [statePunishments])
+    }, [statePayments])
 
-    const addPunishment = (item) => {
-        console.log("item",item)
+    const addPayment = (item) => {
+        console.log("item", item)
         const accessToken = store.getState().userData.data.access_token
-        dispatch(fetchCreatePunishment({
-             access_token: accessToken,
-             data :{
+        dispatch(fetchCreatePayment({
+            access_token: accessToken,
+            data: {
                 title: item.title,
                 reason: item.reason,
                 issuedDate: item.issuedDate,
                 resolvedDate: item.resolvedDate,
-                status: item.status,
-             }
-            }))
-        handlePopupPunishment()
+            }
+        }))
+        handlePopupPayment()
         setIsFetch(true)
     }
 
-    const handlePopupPunishment = (item) => {
+    const handlePopupPayment = (item) => {
         setDataUpdate(item)
-        setPopupPunishment(!PopupPunishment)
+        setPopupPayment(!PopupPayment)
     }
 
-    const deletePunishment = (id) => {
+    const deletePayment = (id) => {
         const accessToken = store.getState().userData.data.access_token
-        dispatch(fetchDeletePunishment({
+        dispatch(fetchDeletePayment({
             access_token: accessToken,
             id: id,
         }))
         setIsFetch(true)
     }
-    const updatePunishment = (item) => {
+    const updatePayment = (item) => {
         const accessToken = store.getState().userData.data.access_token
-        dispatch(fetchUpdatePunishment({
+        dispatch(fetchUpdatePayment({
             access_token: accessToken,
             id: item.id,
-            data :{
+            data: {
                 title: item.title,
                 reason: item.reason,
                 issuedDate: item.issuedDate,
                 resolvedDate: item.resolvedDate,
-                status: item.status,
-             }
+            }
         }))
-        handlePopupPunishment()
         setIsFetch(true)
     }
     return (
         <div className="col-md-10">
-            <button type="button" style={Style.addPunishment} className="btn btn-primary"
-                onClick={handlePopupPunishment}
-            >Add new punishment</button>
-            {PopupPunishment ? <FormPunishment title={"Add New Punishment"}
-                handlePopup={handlePopupPunishment} addPunishment={addPunishment} data={dataUppdate}
-                updatePunishment={updatePunishment}/> : ""}
+            <button type="button" style={Style.addPayment} className="btn btn-primary"
+                onClick={handlePopupPayment}
+            >Add new Payment</button>
+            {PopupPayment ? <FormPayment title={"Add New Payment"}
+                handlePopup={handlePopupPayment} addPayment={addPayment} data={dataUppdate}
+                updatePayment={updatePayment} /> : ""}
             <table className="table table-bordered">
                 <thead>
                     <tr>
@@ -103,7 +101,7 @@ const ListPunishment = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {punishments.map(item =>(
+                    {Payments.map(item => (
                         <tr key={item.id}>
                             <td>{item.id}</td>
                             <td>in</td>
@@ -112,8 +110,8 @@ const ListPunishment = (props) => {
                             <td>{item.resolved_date}</td>
                             <td>{item.status}</td>
                             <td>
-                                <button onClick={() => handlePopupPunishment(item)} type="button" className="btn btn-primary">Edit</button>
-                                <button onClick={() => deletePunishment(item.id)} type="button" className="btn btn-danger">Delete</button>
+                                <button onClick={() => handlePopupPayment(item)} type="button" className="btn btn-primary">Edit</button>
+                                <button onClick={() => deletePayment(item.id)} type="button" className="btn btn-danger">Delete</button>
                             </td>
                         </tr>
                     ))}
@@ -123,4 +121,4 @@ const ListPunishment = (props) => {
     )
 }
 
-export default ListPunishment
+export default ListPayment

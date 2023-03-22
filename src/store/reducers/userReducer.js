@@ -1,7 +1,7 @@
 import { createReducer,createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios';
 
-export const fetchAuthUser = createAsyncThunk("user/fetch", async(props) => {
+export const fetchAuthUser = createAsyncThunk("authuser/fetch", async(props) => {
     const res = await axios.post(`${process.env.REACT_APP_API_URL}/oauth/token`, {
         "client_id": process.env.REACT_APP_CLIENT_ID,
         "client_secret": process.env.REACT_APP_CLIENT_SECRET,

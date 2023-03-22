@@ -1,5 +1,9 @@
 
 import ListPunishment from "../Punishment/ListPunishment"
+import ListContract from "../Contract/ListContract"
+import ListAccident from "../Accident/ListAccident"
+import ListPayment from "../Payment/ListPayment"
+import ListCompensation from "../Compensation/ListCompensation"
 
 export const featuresUser = 
 [
@@ -42,7 +46,7 @@ export const featuresAdmin =
         icon : null,
         description : "",
         active: false,
-        data : <ListPunishment/>
+        data : <ListContract/>
     },
     {
         id:3,
@@ -50,7 +54,7 @@ export const featuresAdmin =
         icon : null,
         description : "",
         active: false,
-        data : <ListPunishment/>
+        data : <ListPayment/>
     },
     {
         id:4,
@@ -66,7 +70,7 @@ export const featuresAdmin =
         icon : null,
         description : "",
         active: false,
-        data : <ListPunishment/>
+        data : <ListCompensation/>
     },
     {
         id:6,
@@ -74,6 +78,6 @@ export const featuresAdmin =
         icon : null,
         description : "",
         active: false,
-        data : <ListPunishment/>
+        data : <ListAccident/>
     },
 ]
